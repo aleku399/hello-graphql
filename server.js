@@ -6,7 +6,11 @@ const PORT = 3000
 
 const app = express()
 
-app.use('/graphql', graphqlHTTP({ schema: Schema, pretty: true }))
+const graphqlOptions = {  schema: Schema,
+                          pretty: true
+                        };
+                        
+app.use('/graphql', graphqlHTTP(graphqlOptions))
 
 const server = app.listen(PORT, function () {
   const host = server.address().address

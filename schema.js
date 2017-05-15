@@ -1,17 +1,30 @@
 const {
   GraphQLObjectType,
   GraphQLSchema,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLString
 } = require('graphql')
 
 let count = 0
 
-const query = new GraphQLObjectType({
+const query = new GraphQLObjectType({ // resolver
   name: 'RootQueryType',
   fields: {
     count: {
       type: GraphQLInt,
-      resolve: () => count
+      resolve: function () { return count }
+    },
+    name: {
+      type: GraphQLString,
+      resolve: function () { return 'alex' }
+    },
+    year: {
+      type: GraphQLInt,
+      resolve: function () { return 2000 }
+    },
+    district: {
+      type: GraphQLString,
+      resolve: function () { return 'Wakiso' }
     }
   }
 })
@@ -21,7 +34,19 @@ const mutation = new GraphQLObjectType({
     updateCount: {
       type: GraphQLInt,
       description: 'Updates the count',
-      resolve: () => ++count
+      resolve: function () { count++ }
+    },
+    updateName: {
+      type: GraphQLString,
+      resolve: function () { return 'second name : Ssentongo' }
+    },
+    updateYear: {
+      type: GraphQLInt,
+      resolve: function () { return 2001 }
+    },
+    updateDistrict: {
+      type: GraphQLString,
+      resolve: function () { return 'Mbale' }
     }
   }
 })
