@@ -5,7 +5,8 @@ const {
   GraphQLString
 } = require('graphql')
 
-let count = 0
+let count = 1
+let year = 2000
 
 const query = new GraphQLObjectType({ // resolver
   name: 'RootQueryType',
@@ -20,7 +21,7 @@ const query = new GraphQLObjectType({ // resolver
     },
     year: {
       type: GraphQLInt,
-      resolve: function () { return 2000 }
+      resolve: function () { return year }
     },
     district: {
       type: GraphQLString,
@@ -34,7 +35,7 @@ const mutation = new GraphQLObjectType({
     updateCount: {
       type: GraphQLInt,
       description: 'Updates the count',
-      resolve: function () { count++ }
+      resolve: function () { return ++count }
     },
     updateName: {
       type: GraphQLString,
@@ -42,7 +43,7 @@ const mutation = new GraphQLObjectType({
     },
     updateYear: {
       type: GraphQLInt,
-      resolve: function () { return 2001 }
+      resolve: function () { return year + 1 }
     },
     updateDistrict: {
       type: GraphQLString,
